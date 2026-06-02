@@ -24,7 +24,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5176"],
+    // origin: ["http://localhost:5174", "http://localhost:5176"],
+    origin: [
+      "https://tech-hub-frontend-alpha.vercel.app/",
+      "http://localhost:5176",
+    ],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   }),
