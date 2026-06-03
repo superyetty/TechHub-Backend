@@ -24,9 +24,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "http://localhost:5176",
+  "http://localhost:5175",
   "http://localhost:5174",
-  "https://tech-hub-frontend-alpha.vercel.app",
   ...(process.env.FRONTEND_URLS
     ? process.env.FRONTEND_URLS.split(",").map((origin) => origin.trim())
     : []),
