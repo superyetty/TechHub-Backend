@@ -26,7 +26,7 @@ app.use(
   cors({
     // origin: ["http://localhost:5174", "http://localhost:5176"],
     origin: [
-      "https://tech-hub-frontend-alpha.vercel.app",
+      "https://tech-hub-frontend-alpha.vercel.app/api",
       "http://localhost:5176",
     ],
     methods: ["POST", "GET", "PUT", "DELETE"],
