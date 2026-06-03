@@ -108,7 +108,6 @@ export const getCheckoutById = async (req, res) => {
 
 export const getCheckout = async (req, res) => {
   const userId = req.user?._id;
-
   if (!userId) {
     return res.status(401).json({
       success: false,
@@ -116,8 +115,7 @@ export const getCheckout = async (req, res) => {
     });
   }
   try {
-    // const checkouts = await Checkout.find({ user: userId });
-    const checkouts = await Checkout.find();
+    const checkouts = await Checkout.find({ user: userId });
 
     return res.status(200).json({
       success: true,
