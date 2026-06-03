@@ -22,13 +22,37 @@ dbURI();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+const allowedOrigins = [
+  "http://localhost:5176",
+  "http://localhost:5174",
+  "https://tech-hub-frontend-alpha.vercel.app",
+  ...(process.env.FRONTEND_URLS
+    ? process.env.FRONTEND_URLS.split(",").map((origin) => origin.trim())
+    : []),
+];
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) {
+    return true;
+  }
+
+  if (allowedOrigins.includes(origin)) {
+    return true;
+  }
+
+  return /^https:\/\/.+\.vercel\.app$/.test(origin);
+};
+
 app.use(
   cors({
-    // origin: ["http://localhost:5174", "http://localhost:5176"],
-    origin: [
-      "https://tech-hub-frontend-alpha.vercel.app/api",
-      "http://localhost:5176",
-    ],
+    origin: (origin, callback) => {
+      if (isAllowedOrigin(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   }),
